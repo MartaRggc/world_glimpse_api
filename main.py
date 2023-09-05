@@ -6,9 +6,12 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
 
-
 import openapi_client
 from datetime import timedelta
+
+from fastapi.responses import JSONResponse
+from openapi_client import ApiException
+
 from com.worldnewsapi import news_api
 
 load_dotenv()
@@ -165,16 +168,15 @@ def get_country_news(country_id: int, news_text: str):
 
     # Here we get the data from the world news api:
     country_name = session.query(Country).filter_by(country_id=country_id).first().country_name
-    news = our_newsapi.search_news(
-        text=country_name+ ' '+news_text, earliest_publish_date=str(pd.Timestamp.now() - timedelta(days=1)),
-        sort='publish-time'
-    )['news']
+    try:
+        news = our_newsapi.search_news(
+            text=country_name + ' ' + news_text, earliest_publish_date=str(pd.Timestamp.now() - timedelta(days=1)),
+            sort='publish-time'
+        )['news']
+    except ApiException as exception_to_use:
+        return JSONResponse(content={"message": str(exception_to_use)}, status_code=429)
 
     return news
-
-
-
-
 
 
 # @app.get("/news_info")
