@@ -1,0 +1,197 @@
+country_id,region_id,country_name
+1,1,Iceland
+29,1,Slovenia
+32,1,Portugal
+38,1,Serbia
+40,1,France
+44,1,Luxembourg
+47,1,Austria
+56,1,Croatia
+60,1,Poland
+63,1,Slovakia
+65,1,Bulgaria
+69,1,Montenegro
+70,1,Malta
+79,1,Italy
+86,1,Bosnia Herzegovina
+87,1,Romania
+93,1,Greece
+99,1,Hungary
+101,1,Czech Republic
+106,1,Cyprus
+28,1,Netherlands
+23,1,Denmark
+73,1,Macedonia
+13,1,Latvia
+2,1,Norway
+18,1,Spain
+3,1,Finland
+5,1,Sweden
+11,1,Ireland
+17,1,Albania
+6,1,Germany
+9,1,Lithuania
+21,1,Switzerland
+22,1,Estonia
+15,1,United Kingdom of Great Britain
+10,1,Belgium
+30,2,Canada
+43,2,United States of America
+57,3,Brazil
+55,3,Bolivia
+14,3,Costa Rica
+24,3,Jamaica
+53,3,Honduras
+7,3,Nicaragua
+67,3,Uruguay
+68,3,El Salvador
+117,3,Guatemala
+81,3,Dominican Republic
+58,3,Panama
+52,3,Suriname
+89,3,Belize
+50,3,Ecuador
+27,3,Chile
+31,3,Barbados
+33,3,Mexico
+36,3,Argentina
+42,3,Colombia
+34,3,Peru
+91,3,Paraguay
+41,4,Belarus
+76,4,Georgia
+83,4,Kyrgyzstan
+97,4,Azerbaijan
+66,4,Ukraine
+19,4,Moldova
+129,4,Türkiye
+62,4,Armenia
+61,4,Kazakhstan
+111,4,Tajikistan
+96,5,Brunei Darussalam
+92,5,Cambodia
+88,5,Indonesia
+107,5,China
+108,5,Vanuatu
+105,5,Republic of Korea
+4,5,New Zealand
+95,5,Timor-Leste
+80,5,Mongolia
+121,5,Fiji
+125,5,Japan
+25,5,Australia
+16,5,Philippines
+49,5,Singapore
+54,5,Lao People’s Democratic Republic
+122,5,Myanmar
+102,5,Malaysia
+72,5,Viet Nam
+74,5,Thailand
+118,6,Angola
+123,6,Côte d'Ivoire
+110,6,Malawi
+130,6,Nigeria
+109,6,Burkina Faso
+135,6,Niger
+137,6,Guinea
+138,6,Benin
+140,6,Congo
+141,6,Mali
+114,6,Comoros
+104,6,Senegal
+119,6,Gambia
+112,6,Sierra Leone
+85,6,Zambia
+100,6,Ghana
+26,6,Mozambique
+20,6,South Africa
+35,6,Burundi
+37,6,Cabo Verde
+39,6,Liberia
+45,6,Zimbabwe
+46,6,Eswatini
+51,6,Madagascar
+12,6,Rwanda
+64,6,Botswana
+145,6,Chad
+48,6,Tanzania
+75,6,Ethiopia
+98,6,Mauritius
+94,6,Cameroon
+77,6,Kenya
+90,6,Togo
+82,6,Lesotho
+8,6,Namibia
+78,6,Uganda
+115,7,Sri Lanka
+143,7,Iran
+142,7,Pakistan
+116,7,Nepal
+146,7,Afghanistan
+127,7,India
+59,7,Bangladesh
+103,7,Bhutan
+124,7,Maldives
+134,8,Egypt
+132,8,Lebanon
+136,8,Morocco
+84,8,Israel
+128,8,Tunisia
+139,8,Oman
+126,8,Jordan
+113,8,Bahrain
+120,8,Kuwait
+71,8,United Arab Emirates
+144,8,Algeria
+133,8,Qatar
+131,8,Saudi Arabia
+147,1,Andorra
+148,3,Antigua and Barbuda
+149,3,Bahamas
+150,6,Central African Republic
+151,3,Cuba
+152,5,Democratic People’s Republic of Korea
+153,6,Djibouti
+154,3,Dominica
+155,6,Equatorial Guinea
+156,6,Eritrea
+157,6,Gabon
+158,3,Grenada
+159,6,Guinea-Bissau
+160,3,Guyana
+161,3,Haiti
+162,8,Iraq
+163,5,Kiribati
+164,8,Libya
+165,1,Liechtenstein
+166,5,Marshall Islands
+167,8,Mauritania
+168,5,Micronesia (Federated States of)
+169,1,Monaco
+170,5,Nauru
+171,5,Palau
+172,5,Papua New Guinea
+173,9,Russia
+174,3,Saint Kitts and Nevis
+175,3,Saint Lucia
+176,3,Saint Vincent and the Grenadines
+177,5,Samoa
+178,1,San Marino
+179,6,Sao Tome and Principe
+180,6,Seychelles
+181,5,Solomon Islands
+182,6,Somalia
+183,6,South Sudan
+184,6,Sudan
+185,8,Syrian Arab Republic
+186,5,Tonga
+187,3,Trinidad and Tobago
+188,4,Turkmenistan
+189,5,Tuvalu
+190,4,Uzbekistan
+191,3,Venezuela
+192,8,Yemen
+193,5,Brunei
+194,5,Micronesia
+195,8,Palestine
+196,1,Vatican City
