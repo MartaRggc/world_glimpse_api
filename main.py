@@ -16,18 +16,22 @@ from openapi_client import ApiException
 
 from com.worldnewsapi import news_api
 from schemas.country_schemas import AllCountriesGGISchema, CountryGGISchema, CountryGeneralSchema, \
-    AllCountriesGDPSchema, CountryGDPSchema
+    AllCountriesGDPSchema, CountryGDPSchema, CountryInequalitySchema, AllCountriesInequalitySchema
 
 load_dotenv()
 
-from models import Country, CountryGovernment, CountryConflict, CountryFP, Region, CountryGGI, CountryGDP
+from models import Country, CountryGovernment, CountryConflict, CountryFP, Region, CountryGGI, CountryGDP, \
+    CountryInequality
 from database import session, Base, engine
 from schemas import (CountrySchema, CountryPoliticsSchema, RegionSchema, CountryFootprintSchema,
                      AllCountriesFoodPrintSchema, CountryNewsSchema)
 
 
 def median_list(feature, alldata):
-    return statistics.median([getattr(i, feature) for i in alldata if getattr(i, feature) is not None])
+    try:
+        return statistics.median([getattr(i, feature) for i in alldata if getattr(i, feature) is not None])
+    except:
+        return None
 
 app = FastAPI()
 
@@ -301,8 +305,7 @@ def get_country_general(country_id: int):
     return general_info
 
 
-
-@app.get("/countries_footprint", response_model=AllCountriesGDPSchema)
+@app.get("/countries_gdp", response_model=AllCountriesGDPSchema)
 def get_countries_gdp():
     """
     This endpoint will group the different data from the country footprint in diverse dimensions.
@@ -314,21 +317,22 @@ def get_countries_gdp():
 
     # We calculate the median values of each variable:
 
-    median_total_gdp = median_list('total_gdp', all_countries_gdp)
+    median_total_gdp = median_list('total_GDP', all_countries_gdp)
     median_world_share = median_list('world_share', all_countries_gdp)
-    median_ppp_gdp_capita = median_list('ppp_gdp_capita', all_countries_gdp)
-    median_gdp_capita = median_list('gdp_capita', all_countries_gdp)
-    median_vs_world = median_list('vs_world', all_countries_gdp)
+    median_ppp_gdp_capita = median_list('PPP_GDP_per_capita', all_countries_gdp)
+    median_gdp_capita = median_list('absolute_GDP_per_capita', all_countries_gdp)
+    median_vs_world = median_list('vsWorld_PPP_GDP_per_capita', all_countries_gdp)
 
     # Instantiate what we need to return. First the countries list:
-    countries_dgp = AllCountriesGDPSchema(
+    countries_gdp = AllCountriesGDPSchema(
         countries=[
             CountryGDPSchema(
-                total_gdp=i.country_id,
-                world_share=i.cropland_footprint,
-                ppp_gdp_capita=i.grazing_footprint,
-                gdp_capita=i.forest_product_footprint,
-                vs_world=i.carbon_footprint
+                country_id=i.country_id,
+                total_gdp=i.total_GDP,
+                world_share=i.world_share,
+                ppp_gdp_capita=i.PPP_GDP_per_capita,
+                gdp_capita=i.absolute_GDP_per_capita,
+                vs_world=i.vsWorld_PPP_GDP_per_capita
 
             ) for i in all_countries_gdp
         ],
@@ -342,9 +346,58 @@ def get_countries_gdp():
         median_vs_world=median_vs_world
     )
 
-    return countries_dgp
+    return countries_gdp
 
 
+@app.get("/countries_inequality", response_model=AllCountriesInequalitySchema)
+def get_countries_inequality():
+    """
+    This endpoint will group the different data from the country footprint in diverse dimensions.
+    It will return the data in a format that will be used by the API consumers defined in the CountryFootprintsSchema.
+    """
+
+    # We get the needed data from the table involved:
+    all_countries_inequality = session.query(CountryInequality).all()
+
+    # We calculate the median values of each variable:
+
+    median_HDI = median_list('HDI', all_countries_inequality)
+    median_coefficient_human_inequality = median_list('coefficient_human_inequality', all_countries_inequality)
+    median_richest_10_percent_share = median_list('richest_10percent_share', all_countries_inequality)
+    median_richest_1_percent_share = median_list('richest_1percent_share', all_countries_inequality)
+    median_gini_coefficient = median_list('gini_coefficient', all_countries_inequality)
+
+    # Instantiate what we need to return. First the countries list:
+    countries_ineq = AllCountriesInequalitySchema(
+        countries=[
+            CountryInequalitySchema(
+                country_id=i.country_id,
+                intensity_depravation_perc=i.intensity_depravation_perc,
+                vulnerable_MP_pop=i.vulnerable_MP_pop,
+                health_contribution=i.health_contribution,
+                education_contribution=i.education_contribution,
+                living_standard_contribution=i.living_standard_contribution,
+                under_national_poverty_line=i.under_national_poverty_line,
+                under_PPP=i.under_PPP_per_day,
+                HDI=i.HDI,
+                coefficient_human_inequality=i.coefficient_human_inequality,
+                richest_10_percent_share=i.richest_10percent_share,
+                richest_1_percent_share=i.richest_1percent_share,
+                gini_coefficient=i.gini_coefficient,
+
+            ) for i in all_countries_inequality
+        ],
+
+        # Then the median values for each variable:
+
+        median_HDI=median_HDI,
+        median_coefficient_human_inequality=median_coefficient_human_inequality,
+        median_richest_10_percent_share=median_richest_10_percent_share,
+        median_richest_1_percent_share=median_richest_1_percent_share,
+        median_gini_coefficient=median_gini_coefficient
+    )
+
+    return countries_ineq
 
 
 

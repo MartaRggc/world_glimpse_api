@@ -57,17 +57,19 @@ class AllCountriesFoodPrintSchema(BaseModel):
     median_number_of_earths_required: float | None
     median_number_of_countries_required: float | None
 
+
 class CountryGDPSchema(BaseModel):
     country_id: int
-    total_gdp: int | None
+    total_gdp: float | None
     world_share: float | None
     ppp_gdp_capita: float | None
     gdp_capita: float | None
     vs_world: float | None
 
+
 class AllCountriesGDPSchema(BaseModel):
     countries: list[CountryGDPSchema]
-    median_total_gdp: int | None
+    median_total_gdp: float | None
     median_world_share: float | None
     median_ppp_gdp_capita: float | None
     median_gdp_capita: float | None
@@ -99,6 +101,7 @@ class CountryGGISchema(BaseModel):
     rank_education_ggi: int | None = None
     rank_health_ggi: int | None = None
 
+
 class AllCountriesGGISchema(BaseModel):
     countries: list[CountryGGISchema]
     median_global_ggi: float
@@ -114,3 +117,30 @@ class CountryGeneralSchema(BaseModel):
     area: float | None = None
     population: float | None = None
     summary: str | None = None
+
+
+class CountryInequalitySchema(BaseModel):
+
+    country_id: int
+    intensity_depravation_perc: float | None = None
+    vulnerable_MP_pop: float | None = None
+    health_contribution: float | None = None
+    education_contribution: float | None = None
+    living_standard_contribution: float | None = None
+    under_national_poverty_line: float | None = None
+    under_PPP: float | None = None
+    HDI: float | None = None
+    coefficient_human_inequality: float | None = None
+    richest_10_percent_share: float | None = None
+    richest_1_percent_share: float | None = None
+    gini_coefficient: float | None = None
+
+
+class AllCountriesInequalitySchema(BaseModel):
+
+    countries: list[CountryInequalitySchema]
+    median_HDI: float | None = None
+    median_coefficient_human_inequality: float | None = None
+    median_richest_10_percent_share: float | None = None
+    median_richest_1_percent_share: float | None = None
+    median_gini_coefficient: float | None = None
