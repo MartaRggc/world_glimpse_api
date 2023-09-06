@@ -169,8 +169,7 @@ class CountryInequality(Base):
     def __init__(self, country_id, intensity_depravation_perc, vulnerable_MP_pop,
                  health_contribution, education_contribution, living_standard_contribution,
                  under_national_poverty_line, under_PPP_per_day, HDI, coefficient_human_inequality,
-                 richest_10percent_share, gini_coefficient,
-                 richest_1percent_share):
+                 richest_10percent_share, richest_1percent_share, gini_coefficient):
         self.country_id = country_id
         self.intensity_depravation_perc = intensity_depravation_perc
         self.vulnerable_MP_pop = vulnerable_MP_pop
