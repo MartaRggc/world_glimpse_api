@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
+from dotenv import load_dotenv
+load_dotenv()
 
 from database import session
 from models import *
-
 
 def convert(val):
     if isinstance(val, np.generic):
@@ -18,6 +19,7 @@ if __name__ == "__main__":
     countries_ggi = pd.read_csv('clean_data/countries_ggi.csv').replace({np.NaN: None})
     government_type = pd.read_csv('clean_data/government_type.csv').replace({np.NaN: None})
     ongoing_conflicts = pd.read_csv('clean_data/ongoing_conflicts.csv').replace({np.NaN: None})
+    ongoing_conflicts.conflict_description = [bytes(i,'utf-8') for i in ongoing_conflicts.conflict_description]
     regions_ggi = pd.read_csv('clean_data/regions_ggi.csv').replace({np.NaN: None})
     countries_footprint = pd.read_csv('clean_data/countries_footprint.csv').replace({np.NaN: None})
     gross_domestic_product_GDP = pd.read_csv('clean_data/gross_domestic_product_GDP.csv').replace({np.NaN: None})
@@ -31,26 +33,16 @@ if __name__ == "__main__":
     #     a = list(rr.iloc[i, :])
     #     a = [convert(i) for i in a]
     #     session.add(Region(*a))
-
-    for i in range(cc.shape[0]):
-        a = list(cc.iloc[i, :])
-        a = [convert(i) for i in a]
-        session.add(Country(*a))
-
+    #
     # for i in range(countries_ggi.shape[0]):
     #     a = list(countries_ggi.iloc[i, :])
     #     a = [convert(i) for i in a]
     #     session.add(CountryGGI(*a))
-
+    #
     # for i in range(government_type.shape[0]):
     #     a = list(government_type.iloc[i, :])
     #     a = [convert(i) for i in a]
     #     session.add(CountryGovernment(*a))
-    #
-    # for i in range(ongoing_conflicts.shape[0]):
-    #     a = list(ongoing_conflicts.iloc[i, :])
-    #     a = [convert(i) for i in a]
-    #     session.add(CountryConflict(*a))
     #
     # for i in range(regions_ggi.shape[0]):
     #     a = list(regions_ggi.iloc[i, :])
@@ -81,5 +73,15 @@ if __name__ == "__main__":
     #     a = list(regions_footprint.iloc[i, :])
     #     a = [convert(i) for i in a]
     #     session.add(RegionFP(*a))
+
+    # for i in range(ongoing_conflicts.shape[0]):
+    #     a = list(ongoing_conflicts.iloc[i, :])
+    #     a = [convert(i) for i in a]
+    #     session.add(CountryConflict(*a))
+
+    # for i in range(cc.shape[0]):
+    #     a = list(cc.iloc[i, :])
+    #     a = [convert(i) for i in a]
+    #     session.add(Country(*a))
 
     session.commit()

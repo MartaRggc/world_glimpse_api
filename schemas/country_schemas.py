@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from pydantic import BaseModel
 
 
@@ -71,3 +70,31 @@ class CountryNewsSchema(BaseModel):
     url: str | None = None
 
 
+class CountryGGISchema(BaseModel):
+    country_id: int
+    global_ggi: float | None = None
+    economic_ggi: float | None = None
+    political_ggi: float | None = None
+    education_ggi: float | None = None
+    health_ggi: float | None = None
+    rank_global_ggi: int | None = None
+    rank_economic_ggi: int | None = None
+    rank_political_ggi: int | None = None
+    rank_education_ggi: int | None = None
+    rank_health_ggi: int | None = None
+
+class AllCountriesGGISchema(BaseModel):
+    countries: list[CountryGGISchema]
+    median_global_ggi: float
+    median_economic_ggi: float
+    median_political_ggi: float
+    median_education_ggi: float
+    median_health_ggi: float
+
+class CountryGeneralSchema(BaseModel):
+
+    capital: str | None = None
+    languages: list | None = None
+    area: float | None = None
+    population: float | None = None
+    summary: str | None = None

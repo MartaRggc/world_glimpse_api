@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey, Column, String, Integer, Float, Text
-from sqlalchemy.dialects.mysql import LONGTEXT
+from sqlalchemy.dialects.mysql import VARCHAR
 from database import Base
 
 
