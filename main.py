@@ -15,11 +15,12 @@ from fastapi.responses import JSONResponse
 from openapi_client import ApiException
 
 from com.worldnewsapi import news_api
-from schemas.country_schemas import AllCountriesGGISchema, CountryGGISchema, CountryGeneralSchema
+from schemas.country_schemas import AllCountriesGGISchema, CountryGGISchema, CountryGeneralSchema, \
+    AllCountriesGDPSchema, CountryGDPSchema
 
 load_dotenv()
 
-from models import Country, CountryGovernment, CountryConflict, CountryFP, Region, CountryGGI
+from models import Country, CountryGovernment, CountryConflict, CountryFP, Region, CountryGGI, CountryGDP
 from database import session, Base, engine
 from schemas import (CountrySchema, CountryPoliticsSchema, RegionSchema, CountryFootprintSchema,
                      AllCountriesFoodPrintSchema, CountryNewsSchema)
@@ -301,80 +302,47 @@ def get_country_general(country_id: int):
 
 
 
-@app.get("/countries_footprint", response_model=AllCountriesFoodPrintSchema)
-def get_countries_footprint():
+@app.get("/countries_footprint", response_model=AllCountriesGDPSchema)
+def get_countries_gdp():
     """
     This endpoint will group the different data from the country footprint in diverse dimensions.
     It will return the data in a format that will be used by the API consumers defined in the CountryFootprintsSchema.
     """
 
     # We get the needed data from the table involved:
-    all_country_footprint = session.query(CountryFP).all()
+    all_countries_gdp = session.query(CountryGDP).all()
 
     # We calculate the median values of each variable:
 
-    median_cropland_footprint = median_list('cropland_footprint', all_country_footprint)
-    median_grazing_footprint = median_list('grazing_footprint', all_country_footprint)
-    median_forest_product_footprint = median_list('forest_product_footprint', all_country_footprint)
-    median_carbon_footprint = median_list('carbon_footprint', all_country_footprint)
-    median_fish_footprint = median_list('fish_footprint', all_country_footprint)
-    median_total_ecological_footprint_consumption = median_list('total_ecological_footprint_consumption',
-                                                                all_country_footprint)
-    median_cropland = median_list('cropland', all_country_footprint)
-    median_grazing_land = median_list('grazing_land', all_country_footprint)
-    median_forest_land = median_list('forest_land', all_country_footprint)
-    median_fishing_ground = median_list('grazing_land', all_country_footprint)
-    median_built_up_land = median_list('fishing_ground', all_country_footprint)
-    median_total_biocapacity = median_list('total_biocapacity', all_country_footprint)
-    median_ecological_deficit_or_reserve = median_list('ecological_deficit_or_reserve', all_country_footprint)
-    median_number_of_earths_required = median_list('number_of_earths_required', all_country_footprint)
-    median_number_of_countries_required = median_list('number_of_countries_required', all_country_footprint)
+    median_total_gdp = median_list('total_gdp', all_countries_gdp)
+    median_world_share = median_list('world_share', all_countries_gdp)
+    median_ppp_gdp_capita = median_list('ppp_gdp_capita', all_countries_gdp)
+    median_gdp_capita = median_list('gdp_capita', all_countries_gdp)
+    median_vs_world = median_list('vs_world', all_countries_gdp)
 
     # Instantiate what we need to return. First the countries list:
-    countries_foot_print = AllCountriesFoodPrintSchema(
+    countries_dgp = AllCountriesGDPSchema(
         countries=[
-            CountryFootprintSchema(
-                country_id=country_foot_print.country_id,
-                cropland_footprint=country_foot_print.cropland_footprint,
-                grazing_footprint=country_foot_print.grazing_footprint,
-                forest_product_footprint=country_foot_print.forest_product_footprint,
-                carbon_footprint=country_foot_print.carbon_footprint,
-                fish_footprint=country_foot_print.fish_footprint,
-                total_ecological_footprint_consumption=country_foot_print.total_ecological_footprint_consumption,
-                cropland=country_foot_print.cropland,
-                grazing_land=country_foot_print.grazing_land,
-                forest_land=country_foot_print.forest_land,
-                fishing_ground=country_foot_print.fishing_ground,
-                built_up_land=country_foot_print.built_up_land,
-                total_biocapacity=country_foot_print.total_biocapacity,
-                ecological_deficit_or_reserve=country_foot_print.ecological_deficit_or_reserve,
-                number_of_earths_required=country_foot_print.number_of_earths_required,
-                number_of_countries_required=country_foot_print.number_of_countries_required,
-                official_country_overshoot_day=country_foot_print.official_country_overshoot_day,
-                official_country_ecological_deficit_day=country_foot_print.official_country_ecological_deficit_day,
-            ) for country_foot_print in all_country_footprint
+            CountryGDPSchema(
+                total_gdp=i.country_id,
+                world_share=i.cropland_footprint,
+                ppp_gdp_capita=i.grazing_footprint,
+                gdp_capita=i.forest_product_footprint,
+                vs_world=i.carbon_footprint
+
+            ) for i in all_countries_gdp
         ],
 
         # Then the median values for each variable:
 
-        median_cropland_footprint=median_cropland_footprint,
-        median_grazing_footprint=median_grazing_footprint,
-        median_forest_product_footprint=median_forest_product_footprint,
-        median_carbon_footprint=median_carbon_footprint,
-        median_fish_footprint=median_fish_footprint,
-        median_total_ecological_footprint_consumption=median_total_ecological_footprint_consumption,
-        median_cropland=median_cropland,
-        median_grazing_land=median_grazing_land,
-        median_forest_land=median_forest_land,
-        median_fishing_ground=median_fishing_ground,
-        median_built_up_land=median_built_up_land,
-        median_total_biocapacity=median_total_biocapacity,
-        median_ecological_deficit_or_reserve=median_ecological_deficit_or_reserve,
-        median_number_of_earths_required=median_number_of_earths_required,
-        median_number_of_countries_required=median_number_of_countries_required
+        median_total_gdp=median_total_gdp,
+        median_world_share=median_world_share,
+        median_ppp_gdp_capita=median_ppp_gdp_capita,
+        median_gdp_capita=median_gdp_capita,
+        median_vs_world=median_vs_world
     )
 
-    return countries_foot_print
+    return countries_dgp
 
 
 

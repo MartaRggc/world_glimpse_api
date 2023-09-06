@@ -57,6 +57,22 @@ class AllCountriesFoodPrintSchema(BaseModel):
     median_number_of_earths_required: float | None
     median_number_of_countries_required: float | None
 
+class CountryGDPSchema(BaseModel):
+    country_id: int
+    total_gdp: int | None
+    world_share: float | None
+    ppp_gdp_capita: float | None
+    gdp_capita: float | None
+    vs_world: float | None
+
+class AllCountriesGDPSchema(BaseModel):
+    countries: list[CountryGDPSchema]
+    median_total_gdp: int | None
+    median_world_share: float | None
+    median_ppp_gdp_capita: float | None
+    median_gdp_capita: float | None
+    median_vs_world: float | None
+
 
 class CountryNewsSchema(BaseModel):
 
