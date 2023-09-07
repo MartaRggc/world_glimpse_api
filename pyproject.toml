@@ -17,6 +17,8 @@ alembic = "1.12.0"
 wikipedia = "1.4.0"
 python-dotenv = "1.0.0"
 python-restcountries = "^2.0.0"
+geoalchemy2 = "^0.14.1"
+geopandas = "^0.13.2"
 
 
 [build-system]

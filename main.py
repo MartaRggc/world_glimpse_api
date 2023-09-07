@@ -243,35 +243,6 @@ def get_countries_ggi():
 
     return countries_ggi
 
-# @app.get("/country/{country_id}/general", response_model=CountryGeneralSchema)
-# def get_country_general(country_id: int):
-#     """
-#     This endpoint will make a request to the world news api for a specific country matching its name with the news texts.
-#     It will return the data in a format that will be used by the API consumers defined in the CountryNewsSchema.
-#     """
-#
-#     # We identify the country name:
-#     country_name = session.query(Country).filter_by(country_id=country_id).first().country_name
-#
-#     # We make a request to the restcountries api to get some general info:
-#     rest_country = rapi.get_countries_by_name(country_name)[0]
-#
-#     # Now we search for a brief summary of the country in wikipedia through its own api:
-
-#
-#     adequate_title = wikipedia.search(wrap(country_name))[0]
-#     wiki_country = wikipedia.summary(adequate_title)
-#
-#     general_info = CountryGeneralSchema(
-#         capital=rest_country.capital,
-#         languages=rest_country.languages,
-#         area=rest_country.area,
-#         population=rest_country.population,
-#         summary=wiki_country,
-#     )
-#
-#     return general_info
-
 
 @app.get("/country/{country_id}/general", response_model=CountryGeneralSchema)
 def get_country_general(country_id: int):

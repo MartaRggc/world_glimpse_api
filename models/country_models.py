@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey, Column, String, Integer, Float, Text
-from sqlalchemy.dialects.mysql import VARCHAR
+from geoalchemy2 import Geometry
 from database import Base
 
 
@@ -17,6 +17,18 @@ class Country(Base):
 
     def __repr__(self):
         return f"({self.country_id}, {self.region_id}) {self.country_name}"
+
+
+# class CountryGEO(Base):
+#     __tablename__ = "countries_geo"
+#
+#     country_id = Column("country_id", Integer, primary_key=True)
+#     geometry = Column("geometry", Geometry)
+#
+#     def __init__(self, country_id, geometry):
+#         self.country_id = country_id
+#         self.geometry = geometry
+
 
 
 class CountryGGI(Base):

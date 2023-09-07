@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 from dotenv import load_dotenv
+# import geopandas as gpd
+
 load_dotenv()
 
 from database import session
@@ -28,16 +30,18 @@ if __name__ == "__main__":
     inequality_and_poverty_countries = pd.read_csv('clean_data/inequality_and_poverty_countries.csv').replace(
         {np.NaN: None})
     regions_footprint = pd.read_csv('clean_data/regions_footprint.csv').replace({np.NaN: None})
+    # countries_geo = gpd.read_file('clean_data/countries_geo.geojson')
+
+
+    # for i in range(countries_ggi.shape[0]):
+    #     a = list(countries_ggi.iloc[i, :])
+    #     a = [convert(i) for i in a]
+    #     session.add(CountryGGI(*a))
 
     # for i in range(rr.shape[0]):
     #     a = list(rr.iloc[i, :])
     #     a = [convert(i) for i in a]
     #     session.add(Region(*a))
-    #
-    # for i in range(countries_ggi.shape[0]):
-    #     a = list(countries_ggi.iloc[i, :])
-    #     a = [convert(i) for i in a]
-    #     session.add(CountryGGI(*a))
     #
     # for i in range(government_type.shape[0]):
     #     a = list(government_type.iloc[i, :])
@@ -85,3 +89,8 @@ if __name__ == "__main__":
     #     session.add(Country(*a))
 
     session.commit()
+
+    # for i in range(countries_geo.shape[0]):
+    #     a = list(countries_geo.iloc[i, :])
+    #     a = [convert(i) for i in a]
+    #     session.add(CountryGEO(*a))
