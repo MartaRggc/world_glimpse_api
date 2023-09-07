@@ -19,5 +19,5 @@ They are all described in comments along the code of the main.py file.
 
 Here is an example of an end-point that gathers information from the database from two different tables for a specific country id; makes a query to the politics one for a summary of the governnment structure, and to the ongoing_conflicts one to obtain information about its peace status:
 
-![image](https://github.com/MartaRggc/world_glimpse_api/assets/137410300/5f1b1ddc-8774-4af5-9a1a-bbed1ceb81d0)
+![image](images/endpoint.png)
 
