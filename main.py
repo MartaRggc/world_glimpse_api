@@ -244,6 +244,11 @@ def get_countries_ggi():
     return countries_ggi
 
 
+@app.get("/")
+def hello():
+    return {'Hi': 'Welcome to World glimpse!'}
+
+
 @app.get("/country/{country_id}/general", response_model=CountryGeneralSchema)
 def get_country_general(country_id: int):
     """
