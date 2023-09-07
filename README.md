@@ -18,4 +18,5 @@ The diverse endpoints created were meant to provide specific information to the 
 
 Here is an example of an end point that makes a request to two other APIs for a specific country id; to wikipedia for a summary and to restcountries for general data:
 
-![image](https://github.com/MartaRggc/world_glimpse_api/assets/137410300/750bce46-226a-4a37-8a04-5a0dff1d809d)
+![image](https://github.com/MartaRggc/world_glimpse_api/assets/137410300/5f1b1ddc-8774-4af5-9a1a-bbed1ceb81d0)
+
