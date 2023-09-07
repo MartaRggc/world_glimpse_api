@@ -14,9 +14,10 @@ A subsection of news for each country is also included, based on calls to the Wo
 # About the API:
 
 The API built to feed the front-end was made with FastAPI. It was connected to a MySQL database by classes mapped to the tables through sqlalchemy.
-The diverse endpoints created were meant to provide specific information to the front, and are described in comments along the code of the main.py file.
+The diverse end-points created were meant to provide specific information to the front, from the database and also from other APIs such as restcountries or World News API.
+They are all described in comments along the code of the main.py file.
 
-Here is an example of an end point that makes a request to two other APIs for a specific country id; to wikipedia for a summary and to restcountries for general data:
+Here is an example of an end-point that gathers information from the database from two different tables for a specific country id; makes a query to the politics one for a summary of the governnment structure, and to the ongoing_conflicts one to obtain information about its peace status:
 
 ![image](https://github.com/MartaRggc/world_glimpse_api/assets/137410300/5f1b1ddc-8774-4af5-9a1a-bbed1ceb81d0)
 
